@@ -13,9 +13,9 @@
 
 
 
-<robot name="pacifica_structure" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<!-- <robot name="pacifica_structure" xmlns:xacro="http://www.ros.org/wiki/xacro" >
   <xacro:arg name="dae_file" default="$(find dbw_fca_description)/meshes/pacifica_18/body.dae"/>
-  <!-- load parameter -->
+  load parameter
   <xacro:property name="vehicle_info" value="${xacro.load_yaml('$(find pacifica_vehicle_description)/config/vehicle_info.param.yaml')}"/>
 
   <xacro:property name="half_track_width" value="0.77" />
@@ -108,22 +108,17 @@
     </joint>
   </xacro:macro>
 
-  <link name="base_footprint" >
-    <visual>
-      <origin xyz="${vehicle_info['/**']['ros__parameters']['wheel_base']/2.0} 0 0" rpy="${pi/2.0} 0 ${pi}"/>
-    </visual>
-  </link>
-
+  <link name="base_footprint" />
 
   <link name="base_link" >
     <visual>
-      <origin xyz="-0.06 0 0.1" rpy="0 0 0" />
+      <origin xyz="1.54 0 -0.1825" rpy="0 0 0" />
       <geometry>
         <mesh filename="file://$(arg dae_file)" scale="0.96 0.96 0.96" />
       </geometry>
     </visual>
     <collision>
-      <origin xyz="-0.06 0 0.1" rpy="0 0 0" />
+      <origin xyz="1.54 0 -0.1825" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://dbw_fca_description/meshes/pacifica_18/body_collision.stl" scale="0.96 0.96 0.96" />
       </geometry>
@@ -162,13 +157,13 @@
   <joint name="hood_logo_joint" type="fixed" >
     <parent link="base_link" />
     <child link="hood_logo" />
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="1.54 0 0" rpy="0 0 0" />
   </joint>
 
   <joint name="door_logo_joint" type="fixed" >
     <parent link="base_link" />
     <child link="door_logo" />
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="1.54 0 0" rpy="0 0 0" />
   </joint>
 
   <xacro:rear_wheel name="rl" x="${-half_wheelbase}" y="${half_track_width}" z="0" flip="0" />
@@ -188,4 +183,19 @@
     </visual>
   </gazebo>
 
+</robot> -->
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- load parameter -->
+  <xacro:property name="vehicle_info" value="${xacro.load_yaml('$(find pacifica_vehicle_description)/config/vehicle_info.param.yaml')}"/>
+
+  <!-- vehicle body -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="${vehicle_info['/**']['ros__parameters']['wheel_base']/2.0} 0 ${vehicle_info['/**']['ros__parameters']['wheel_radius']/2.0}" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://pacifica_vehicle_description/mesh/body.dae" scale="1 1 1" rpy="0 0 0"/>
+      </geometry>
+    </visual>
+  </link>
 </robot>
