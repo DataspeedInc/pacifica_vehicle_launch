@@ -194,7 +194,7 @@
     <visual>
       <origin xyz="${vehicle_info['/**']['ros__parameters']['wheel_base']/2.0} 0 ${vehicle_info['/**']['ros__parameters']['wheel_radius']/2.0}" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://pacifica_vehicle_description/mesh/body.dae" scale="1 1 1" rpy="0 0 0"/>
+        <mesh filename="package://pacifica_vehicle_description/mesh/body.dae" scale="1 1 1" xyz="0 0 $vehicle_info['/**']['ros__parameters']['wheel_radius']/2.0" rpy="0 0 0"/>
       </geometry>
     </visual>
   </link>
